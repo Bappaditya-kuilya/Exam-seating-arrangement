@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Exam Seating Arrangement</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <div class="title">
+        <span class="icon">📘</span>
+        <div>
+          <h1>Exam Seating Arrangement</h1>
+          <p class="subtitle">Manage students and generate randomized seating plans</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Exam Details -->
+      <section class="card">
+        <h2>Exam Details</h2>
+        <div class="row">
+          <input id="examName" type="text" placeholder="Exam name (e.g. Mid Term)" />
+          <input id="examDate" type="date" />
+        </div>
+      </section>
+
+      <!-- Students -->
+      <section class="card">
+        <h2>Student Management</h2>
+
+        <form id="studentForm" class="input-row">
+          <input id="roll" name="roll" type="text" placeholder="Roll Number" />
+          <input id="name" name="name" type="text" placeholder="Student Name" />
+          <input id="dept" name="dept" type="text" placeholder="Department (Optional)" />
+          <button type="submit" class="btn primary">+ Add Student</button>
+        </form>
+
+        <div class="meta">Total Students: <span id="studentCount">0</span></div>
+
+        <div class="table-wrap">
+          <table id="studentTable">
+            <thead>
+              <tr><th>Roll</th><th>Name</th><th>Dept</th><th>Action</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Halls -->
+      <section class="card">
+        <h2>Hall Management</h2>
+
+        <form id="hallForm" class="input-row">
+          <input id="hallName" name="hallName" type="text" placeholder="Hall Name (e.g. A - 101)" />
+          <input id="hallCapacity" name="hallCapacity" type="number" min="1" placeholder="Capacity" />
+          <button type="submit" class="btn primary">+ Add Hall</button>
+        </form>
+
+        <div class="meta">Total Halls: <span id="hallCount">0</span></div>
+
+        <div class="table-wrap">
+          <table id="hallTable">
+            <thead>
+              <tr><th>Hall</th><th>Capacity</th><th>Action</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Generate -->
+      <section class="card center">
+        <h2>Ready to Generate?</h2>
+        <div class="summary">
+          Students: <strong id="sumStudents">0</strong> |
+          Halls: <strong id="sumHalls">0</strong> |
+          Total Capacity: <strong id="sumCapacity">0</strong>
+        </div>
+        <div class="controls">
+          <button id="generateBtn" class="btn success">Generate Arrangement</button>
+          <button id="clearBtn" class="btn danger">Clear All</button>
+        </div>
+
+        <div id="result" class="result"></div>
+      </section>
+    </main>
+
+    <footer class="footer">Built for college project — simple, clear & extendable.</footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
