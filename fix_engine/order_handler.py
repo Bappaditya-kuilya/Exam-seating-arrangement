@@ -1,20 +1,10 @@
-# FIX Protocol order handler — Tag 35=D New Order Single
-import time
-import sqlite3  # added for audit logging
-
-_db = sqlite3.connect("audit.db")  # sync connection at module level
+# FIX Protocol — Tag 35=D New Order Single handler
+# Latency SLA: all processing must complete within 20ms (JIRA-802)
 
 def process_new_order_single(tag35d_message: dict) -> dict:
-    """Handle incoming Tag 35=D FIX message. Must complete < 20ms."""
     order_id = tag35d_message.get("ClOrdID")
-    symbol = tag35d_message.get("Symbol")
-    qty = tag35d_message.get("OrderQty")
-
-    # SYNCHRONOUS DB WRITE — violates JIRA-802 Tag 35=D latency SLA
-    _db.execute(
-        "INSERT INTO audit_log VALUES (?, ?, ?)", (order_id, symbol, qty)
-    )
-    _db.commit()
+    symbol   = tag35d_message.get("Symbol")
+    qty      = tag35d_message.get("OrderQty")
 
     if not all([order_id, symbol, qty]):
         return {"status": "REJECTED", "reason": "Missing required FIX fields"}
